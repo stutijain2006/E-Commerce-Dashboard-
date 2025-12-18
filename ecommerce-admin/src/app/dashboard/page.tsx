@@ -1,5 +1,6 @@
 import type { Product } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import ProductCharts from "@/components/ProductCharts";
 
 export const runtime = "nodejs";
 
@@ -29,6 +30,7 @@ export default async function Dashboard() {
                     ))}
                 </tbody>
             </table>
+            <ProductCharts products={products} />
         </div>
     )
 }
