@@ -1,6 +1,8 @@
 import type { Product } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
+export const runtime = "nodejs";
+
 export default async function Dashboard() {
     const products: Product[] = await prisma.product.findMany({
         orderBy: {createdAt : "desc"},
