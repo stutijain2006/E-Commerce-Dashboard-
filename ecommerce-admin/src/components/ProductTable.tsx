@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Product } from "@prisma/client";
 
@@ -15,16 +15,22 @@ export default function ProductTable({ products: initialProducts }: ProductTable
     const [deletingId, setDeletingId] = useState<string | null>(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
 
-    const filteredProducts = products.filter((product) => {
+    // Update products when initialProducts changes (after refresh)
+    useEffect(() => {
+        setProducts(initialProducts);
+    }, [initialProducts]);
+
+    const filteredProducts = useMemo(() => {
+        if (!searchTerm) return products;
         const searchLower = searchTerm.toLowerCase();
-        return (
+        return products.filter((product) => (
             product.id.toLowerCase().includes(searchLower) ||
             product.name.toLowerCase().includes(searchLower) ||
             product.description.toLowerCase().includes(searchLower) ||
             product.price.toString().includes(searchLower) ||
             product.stock.toString().includes(searchLower)
-        );
-    });
+        ));
+    }, [products, searchTerm]);
 
     const handleDelete = async (id: string) => {
         setDeletingId(id);
@@ -40,7 +46,11 @@ export default function ProductTable({ products: initialProducts }: ProductTable
             }
 
             setProducts(products.filter((p) => p.id !== id));
-            router.refresh();
+            // Use router.refresh() only if needed, but it causes full page reload
+            // Instead, we'll update local state and let the parent handle refresh if needed
+            setTimeout(() => {
+                router.refresh();
+            }, 100);
         } catch (error) {
             console.error("Delete error:", error);
             alert(`Failed to delete product: ${error instanceof Error ? error.message : "Unknown error"}`);
