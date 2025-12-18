@@ -5,5 +5,5 @@ export const productSchema = z.object({
     description : z.string(),
     price: z.number().positive(),
     stock : z.number().int().nonnegative(),
-    imageUrl : z.string().url(),
+    imageUrl : z.string().url().optional(),
 });
