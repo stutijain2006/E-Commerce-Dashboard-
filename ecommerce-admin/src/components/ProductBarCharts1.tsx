@@ -13,7 +13,7 @@ export default function ProductBarCharts1({ products }: { products: Product[] })
           <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" />
           <Tooltip />
           <Legend />
-          <Bar dataKey="price" fill="#4f46e5" />
+          <Bar dataKey="Price" fill="#4f46e5" />
         </BarChart>
       </ResponsiveContainer>
     </div>
