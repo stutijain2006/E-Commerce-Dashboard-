@@ -1,4 +1,3 @@
-import type { Product } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import ProductBarCharts from "@/components/ProductBarCharts";
 import ProductBarCharts1 from "@/components/ProductBarCharts1";
@@ -8,7 +7,7 @@ import LogOutButton from "@/components/LogoutButton";
 export const runtime = "nodejs";
 
 export default async function Dashboard() {
-    const products: Product[] = await prisma.product.findMany({
+    const products = await prisma.product.findMany({
         orderBy: { createdAt: "desc" },
     });
     
