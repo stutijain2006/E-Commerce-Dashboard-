@@ -22,6 +22,9 @@ export default async function Dashboard() {
                             {products.length} product{products.length === 1 ? "" : "s"} in inventory
                         </p>
                     </div>
+                    <div className="flex items-center gap-4">
+                        <a href="/dashboard/admin" className="px-4 py-2 border text-[1rem] font-medium rounded-lg hover:bg-emerald-700 transition">+ Add Admin </a>
+                    </div>
                     <LogOutButton />
                 </header>
 
