@@ -110,6 +110,11 @@ CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
 - **CLOUDINARY_API_SECRET**: Your Cloudinary API secret
   - Found in your Cloudinary Dashboard under Account Details
 
+
+### Initial Admin Credentials-
+ADMIN_EMAIL = "admin.example@gmail.com"
+ADMIN_PASSWORD = "admin1234"
+
 ### 4. Set Up PostgreSQL Database
 
 1. Create a new PostgreSQL database:
@@ -156,59 +161,18 @@ The application will be available at [http://localhost:3000](http://localhost:30
 
 Navigate to [http://localhost:3000/dashboard](http://localhost:3000/dashboard) to access the admin dashboard.
 
-## 📁 Project Structure
 
-```
-ecommerce-admin/
-├── prisma/
-│   ├── schema.prisma          # Database schema
-│   ├── migrations/            # Database migrations
-│   └── prisma.config.ts      # Prisma configuration
-├── src/
-│   ├── app/
-│   │   ├── api/              # API routes
-│   │   │   ├── products/     # Product CRUD endpoints
-│   │   │   └── upload/       # Image upload endpoint
-│   │   ├── dashboard/        # Dashboard pages
-│   │   │   ├── create/       # Create product page
-│   │   │   ├── edit/[id]/    # Edit product page
-│   │   │   └── page.tsx      # Main dashboard page
-│   │   ├── layout.tsx        # Root layout
-│   │   └── globals.css       # Global styles
-│   ├── components/           # React components
-│   │   ├── ProductTable.tsx  # Product table with search
-│   │   ├── ProductForm.tsx   # Create product form
-│   │   ├── ProductFormEdit.tsx # Edit product form
-│   │   └── ProductBarCharts*.tsx # Chart components
-│   ├── lib/                  # Utility libraries
-│   │   ├── prisma.ts         # Prisma client instance
-│   │   └── cloudinary.ts     # Cloudinary configuration
-│   └── schema/               # Zod validation schemas
-│       └── product.schema.ts
-├── .env                      # Environment variables (create this)
-├── sample.env                # Environment variables template
-├── package.json
-└── README.md
-```
-
-## 🔧 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## 📝 API Endpoints
-
-### Products
-- `GET /api/products` - Get all products
-- `POST /api/products` - Create a new product
-- `GET /api/products/[id]` - Get a single product
-- `PUT /api/products/[id]` - Update a product
-- `DELETE /api/products/[id]` - Delete a product
-
-### Upload
-- `POST /api/upload` - Upload an image to Cloudinary
+### 8. Application workflow-
+1. Admin logs in
+2. Server validates credentials
+3. Dashboard page is server-rendered
+4. Products fetched from database via Prisma
+5. Admin:
+* Creates / updates / deletes products
+* Uploads images
+* Views charts
+* Creates new admins
+6. UI refreshes with latest server data
 
 ## 🎨 Features in Detail
 
