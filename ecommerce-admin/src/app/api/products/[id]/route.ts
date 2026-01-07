@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> | { id: string } }) {
     try {
-        // Handle both Next.js 15+ (Promise) and older versions
         const resolvedParams = params instanceof Promise ? await params : params;
         const product = await prisma.product.findUnique({
             where: { id: resolvedParams.id },
@@ -20,7 +19,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> | { id: string } }) {
     try {
-        // Handle both Next.js 15+ (Promise) and older versions
         const resolvedParams = params instanceof Promise ? await params : params;
         const body = await request.json();
         const product = await prisma.product.update({
@@ -36,7 +34,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
 export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> | { id: string } }) {
     try {
-        // Handle both Next.js 15+ (Promise) and older versions
         const resolvedParams = params instanceof Promise ? await params : params;
         const productId = resolvedParams.id;
         
@@ -49,7 +46,6 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ id: str
     } catch (error: any) {
         console.error("Error deleting product:", error);
         
-        // Handle Prisma errors
         if (error?.code === 'P2025') {
             return NextResponse.json({ error: "Product not found" }, { status: 404 });
         }

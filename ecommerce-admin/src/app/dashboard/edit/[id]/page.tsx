@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 export const runtime = "nodejs";
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> | { id: string } }) {
-    // Handle both Next.js 15+ (Promise) and older versions
     const resolvedParams = params instanceof Promise ? await params : params;
     
     const product = await prisma.product.findUnique({

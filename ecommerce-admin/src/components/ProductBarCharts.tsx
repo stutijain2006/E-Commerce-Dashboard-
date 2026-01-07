@@ -21,7 +21,7 @@ export default function ProductBarCharts({ products }: { products: Product[] }) 
   }
 
   return (
-    <div className="w-full h-[50vh] min-h-[400px]">
+    <div className="w-full h-[50vh] min-h-[30vh]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
